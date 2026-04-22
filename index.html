@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoadZen — AI Road Safety Platform</title>
+  <meta name="description" content="AI-powered road safety intelligence for India. Real-time accident heatmaps, risk prediction, and safety analytics.">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <span style="font-size:1.4rem">🛡️</span>
+      <span>RoadZen</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link active">Home</a>
+      <a href="/heatmap" class="nav-link">Heatmap</a>
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/predict" class="nav-link">Predict</a>
+      <a href="/chatbot" class="nav-link">AI Chat</a>
+    </div>
+    <div class="nav-right"><span class="status-dot"></span> System Online</div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1><span class="accent">AI-Powered</span> Road Safety for India</h1>
+      <p>Real-time accident heatmaps, risk prediction, explainable AI, and safety analytics — covering every state in India</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num" id="s-accidents">4,61,312</span><span class="label">Annual Accidents</span></div>
+        <div class="hero-stat"><span class="num" id="s-fatalities">1,53,972</span><span class="label">Annual Fatalities</span></div>
+        <div class="hero-stat"><span class="num">29</span><span class="label">States Covered</span></div>
+        <div class="hero-stat"><span class="num">6,255</span><span class="label">Data Points</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <main class="page">
+    <div class="section-header text-center">
+      <h2>Explore the Platform</h2>
+      <p>Everything you need to understand and prevent road accidents in India</p>
+    </div>
+    <div class="features">
+      <a href="/heatmap" class="feature-card">
+        <span class="icon">🗺️</span>
+        <h3>Accident Heatmap</h3>
+        <p>Interactive map with 6,000+ accident hotspots across India. Multiple map themes. Trauma center locations.</p>
+      </a>
+      <a href="/dashboard" class="feature-card">
+        <span class="icon">📊</span>
+        <h3>Analytics Dashboard</h3>
+        <p>State-wise statistics, hourly trends, weather impact, vehicle analysis — all from NCRB data.</p>
+      </a>
+      <a href="/predict" class="feature-card">
+        <span class="icon">🎯</span>
+        <h3>Risk Prediction</h3>
+        <p>ML-powered accident severity prediction with SHAP explainability. Know your risk before you drive.</p>
+      </a>
+      <a href="/chatbot" class="feature-card">
+        <span class="icon">💬</span>
+        <h3>AI Assistant</h3>
+        <p>Ask anything about road safety. Get instant answers on statistics, tips, emergency info, and more.</p>
+      </a>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="mt-24">
+      <div class="section-header">
+        <h2>India Road Safety at a Glance</h2>
+        <p>Key statistics from the National Crime Records Bureau (NCRB)</p>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-box"><span class="value">1 death</span><span class="desc">Every 3.4 minutes on Indian roads</span></div>
+        <div class="stat-box"><span class="value">44%</span><span class="desc">Fatalities involve two-wheelers</span></div>
+        <div class="stat-box"><span class="value">18-35</span><span class="desc">Most affected age group</span></div>
+        <div class="stat-box"><span class="value">76%</span><span class="desc">Caused by human error</span></div>
+      </div>
+    </div>
+
+    <!-- Recent Incidents -->
+    <div class="mt-24">
+      <div class="section-header">
+        <h2>Recent Incidents</h2>
+        <p>Latest major road accidents reported across India</p>
+      </div>
+      <div class="card">
+        <div id="incidents-list" style="font-size:0.88rem; color:var(--text-secondary);">Loading...</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>🛡️ <strong>RoadZen</strong> — AI Road Safety Intelligence Platform for India</p>
+  </footer>
+
+  <script>
+    const API = '';
+    fetch(`${API}/api/recent-incidents`).then(r=>r.json()).then(data=>{
+      const el = document.getElementById('incidents-list');
+      el.innerHTML = data.map(d => {
+        const bc = d.severity === 'Fatal' ? 'badge-fatal' : d.severity === 'Severe' ? 'badge-severe' : 'badge-moderate';
+        return `<div class="incident-item"><span class="date">${d.date}</span> · <span class="location">${d.location}</span> · <span class="badge ${bc}">${d.severity}</span> · ${d.type} (${d.casualties} casualties, ${d.cause})</div>`;
+      }).join('');
+    }).catch(()=>{});
+  </script>
+</body>
+</html>
