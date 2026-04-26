@@ -20,6 +20,7 @@
 
 - [Overview](#-overview)
 - [Core Theme & Vision](#-core-theme--vision)
+- [Setup & Installation](#-setup--installation)
 - [Live Features](#-live-features)
 - [System Architecture](#-system-architecture)
 - [How It Works — Business Logic](#-how-it-works--business-logic)
@@ -27,7 +28,6 @@
 - [API Reference](#-api-reference)
 - [Tech Stack](#-tech-stack)
 - [Repository Structure](#-repository-structure)
-- [Setup & Installation](#-setup--installation)
 - [Dataset](#-dataset)
 - [Author](#-author)
 
@@ -52,6 +52,73 @@ The platform ingests historical Indian road accident data, trains a multi-class 
 | **Data-Driven Insights** | Six analytics charts surface patterns across time, weather, and vehicle type |
 
 The guiding principle: **move from reactive accident response to proactive risk prevention.**
+
+---
+
+## ⚙️ Setup & Installation
+
+### Prerequisites
+
+- Python **3.9+**
+- `pip` package manager
+- A terminal / command prompt
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/hariharasudhan-29507/RoadZen.git
+cd RoadZen
+```
+
+### 2. Install Python Dependencies
+
+```bash
+pip install fastapi uvicorn xgboost shap scikit-learn pandas numpy joblib
+```
+
+> **Optional** — for the PyCaret-based alternative trainer:
+> ```bash
+> pip install pycaret
+> ```
+
+### 3. (Optional) Retrain the Model
+
+Skip this step if you want to use the pre-trained `model.pkl` already in `backend/`.
+
+Place your accident CSV files in the `dataset/` folder, then run:
+
+```bash
+cd TrainerSet
+python Trainer_set_model_XGB.py
+```
+
+This will overwrite `backend/model.pkl`, `backend/label_encoders.pkl`, and all `backend/*.json` analytics files.
+
+### 4. Start the Backend Server
+
+```bash
+cd backend
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+The API will be live at **`http://localhost:8000`**.
+
+### 5. Open the Application
+
+Navigate to **`http://localhost:8000`** in your browser. The FastAPI server serves the frontend directly — no separate web server required.
+
+> **Interactive API docs** (Swagger UI) are available at `http://localhost:8000/docs`
+
+### Quick Start Summary
+
+```bash
+git clone https://github.com/hariharasudhan-29507/RoadZen.git
+cd RoadZen
+pip install fastapi uvicorn xgboost shap scikit-learn pandas numpy joblib
+cd backend
+uvicorn main:app --reload
+# Open http://localhost:8000
+```
 
 ---
 
@@ -394,73 +461,6 @@ RoadZen/
 
 ---
 
-## ⚙️ Setup & Installation
-
-### Prerequisites
-
-- Python **3.9+**
-- `pip` package manager
-- A terminal / command prompt
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/hariharasudhan-29507/RoadZen.git
-cd RoadZen
-```
-
-### 2. Install Python Dependencies
-
-```bash
-pip install fastapi uvicorn xgboost shap scikit-learn pandas numpy joblib
-```
-
-> **Optional** — for the PyCaret-based alternative trainer:
-> ```bash
-> pip install pycaret
-> ```
-
-### 3. (Optional) Retrain the Model
-
-Skip this step if you want to use the pre-trained `model.pkl` already in `backend/`.
-
-Place your accident CSV files in the `dataset/` folder, then run:
-
-```bash
-cd TrainerSet
-python Trainer_set_model_XGB.py
-```
-
-This will overwrite `backend/model.pkl`, `backend/label_encoders.pkl`, and all `backend/*.json` analytics files.
-
-### 4. Start the Backend Server
-
-```bash
-cd backend
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-The API will be live at **`http://localhost:8000`**.
-
-### 5. Open the Application
-
-Navigate to **`http://localhost:8000`** in your browser. The FastAPI server serves the frontend directly — no separate web server required.
-
-> **Interactive API docs** (Swagger UI) are available at `http://localhost:8000/docs`
-
-### Quick Start Summary
-
-```bash
-git clone https://github.com/hariharasudhan-29507/RoadZen.git
-cd RoadZen
-pip install fastapi uvicorn xgboost shap scikit-learn pandas numpy joblib
-cd backend
-uvicorn main:app --reload
-# Open http://localhost:8000
-```
-
----
-
 ## 📊 Dataset
 
 | File | Source | Records | Notes |
@@ -483,7 +483,8 @@ The combined dataset contains features including `hrmn` (hour-minute), `driver_a
       <strong>Hariharasudhan</strong><br>
       <a href="https://github.com/hariharasudhan-29507">@hariharasudhan-29507</a><br>
       <em>sophomore in CSE , MEPCO schlenk engineering college</em>
-            <em>Sivakasi</em>
+            <em>Sivakasi</em><br>
+      📧 Reach me: <a href="mailto:sudanayyappan_bcs28@mepcoeng.ac.in">sudanayyappan_bcs28@mepcoeng.ac.in</a>
     </td>
   </tr>
 </table>
