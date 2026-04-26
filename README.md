@@ -482,7 +482,8 @@ The combined dataset contains features including `hrmn` (hour-minute), `driver_a
     <td align="center">
       <strong>Hariharasudhan</strong><br>
       <a href="https://github.com/hariharasudhan-29507">@hariharasudhan-29507</a><br>
-      <em>AI / ML Engineer · Full-Stack Developer</em>
+      <em>sophomore in CSE , MEPCO schlenk engineering college</em>
+            <em>Sivakasi</em>
     </td>
   </tr>
 </table>
